@@ -1,26 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    names: ["John", "Holly", "Vicky"],
+    petName: "..."
+  }
+
+  changeNames = () => {
+    this.setState({
+      names: ["Peter", "Arthur", "Ann"]
+    })
+  }
+
+  getPetName = (event) => {
+    this.setState({
+      petName: event.target.value
+    })
+  }
+
+
+  render() {
+    const namesList = this.state.names.map((name) =>{
+      return <h1>My name is {name}</h1>
+    })
+    return(
+      <div>
+        {namesList}
+        <div>
+          <input onChange={this.getPetName} type="text"/>
+          <h2>Your Pet name is {this.state.petName}</h2>
+        </div>
+        <button onClick={this.changeNames} className="btn" >Change Names</button>
+      </div>
+    )
+  }
 }
 
 export default App;
